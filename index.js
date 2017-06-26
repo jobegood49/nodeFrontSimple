@@ -1,6 +1,5 @@
 console.log("hello");
 
-const url = "http://localhost:3000/movies"
 const urlMovie2 = "http://localhost:3000/movies/2"
 const urlMovie6 = "http://localhost:3000/movies/6"
 
@@ -43,7 +42,7 @@ fetch(urlMovie2, {
     })
 
 */
-
+/*
 Promise.all([
     fetch(urlMovie2, {
         method: "GET"
@@ -62,9 +61,45 @@ Promise.all([
 
 })
 
+*/
+
+
+const firstRequest = fetch(urlMovie2, {
+    method: "GET"
+});
+
+const secondRequest = fetch(urlMovie6, {
+    method: "GET"
+});
 
 
 
 
+firstRequest
+    .then(function(response){
+        return response.json();
+    })
+    .then(function (json) {
+        this.firstMovie = json;
+        return console.log(json);
+    })
+    .then(function () {
+        return secondRequest;
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (json) {
+        this.secondMovie = json;
+        return console.log(json);
+    })
+    .then(function () {
+        let arr = [];
+        arr.push(firstMovie);
+        arr.push(secondMovie);
+        console.log(arr);
+
+        return arr
+    })
 
 
